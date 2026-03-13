@@ -1,0 +1,314 @@
+<?php
+/* ==================================================
+1️⃣ INÍCIO E FIM DO PHP
+================================================== */
+
+// Todo código PHP começa com <?php e termina com ?>
+
+
+/* ==================================================
+2️⃣ COMENTÁRIOS
+================================================== */
+
+// Comentário de uma linha
+
+# Comentário de uma linha
+
+/*
+Comentário
+de várias
+linhas
+*/
+
+
+/* ==================================================
+3️⃣ VARIÁVEIS
+================================================== */
+
+$name = "Ivy";
+$price = 5;
+$age = 20;
+
+
+/* ==================================================
+4️⃣ ECHO (MOSTRAR NA TELA)
+================================================== */
+
+echo "Olá Mundo";
+echo "<br>";
+
+echo $name;
+echo "<br>";
+
+echo "Meu nome é $name";
+echo "<br>";
+
+
+
+/* ==================================================
+5️⃣ OPERADORES ARITMÉTICOS
+================================================== */
+
+$a = 10;
+$b = 5;
+
+$soma = $a + $b;
+$subtracao = $a - $b;
+$multiplicacao = $a * $b;
+$divisao = $a / $b;
+$resto = $a % $b;
+
+echo "Soma: $soma <br>";
+echo "Subtração: $subtracao <br>";
+echo "Multiplicação: $multiplicacao <br>";
+echo "Divisão: $divisao <br>";
+echo "Resto: $resto <br>";
+
+
+
+/* ==================================================
+6️⃣ OPERADORES DE COMPARAÇÃO
+================================================== */
+
+$x = 10;
+$y = 8;
+
+echo $x == $y;
+echo "<br>";
+
+echo $x != $y;
+echo "<br>";
+
+echo $x > $y;
+echo "<br>";
+
+echo $x < $y;
+echo "<br>";
+
+echo $x >= $y;
+echo "<br>";
+
+echo $x <= $y;
+echo "<br>";
+
+
+
+/* ==================================================
+7️⃣ OPERADORES LÓGICOS
+================================================== */
+
+$idade = 20;
+$temCarteira = true;
+
+$resultado = ($idade >= 18 && $temCarteira);
+
+echo $resultado;
+echo "<br>";
+
+
+
+/* ==================================================
+8️⃣ CONTROLE CONDICIONAL (IF / ELSE)
+================================================== */
+
+$nota = 7;
+
+if ($nota >= 7) {
+
+    echo "Aprovado";
+
+} else {
+
+    echo "Reprovado";
+
+}
+
+echo "<br>";
+
+
+
+/* ==================================================
+9️⃣ IF / ELSEIF / ELSE
+================================================== */
+
+$nota = 6;
+
+if ($nota >= 7) {
+
+    echo "Aprovado";
+
+} elseif ($nota >= 5) {
+
+    echo "Recuperação";
+
+} else {
+
+    echo "Reprovado";
+
+}
+
+echo "<br>";
+
+
+
+/* ==================================================
+🔟 OPERADOR TERNÁRIO
+================================================== */
+
+$idade = 18;
+
+$resultado = ($idade >= 18) ? "Maior de idade" : "Menor de idade";
+
+echo $resultado;
+echo "<br>";
+
+
+
+/* ==================================================
+1️⃣1️⃣ SWITCH
+================================================== */
+
+$dia = "segunda";
+
+switch ($dia) {
+
+    case "segunda":
+        echo "Hoje é segunda-feira";
+        break;
+
+    case "terça":
+        echo "Hoje é terça-feira";
+        break;
+
+    case "quarta":
+        echo "Hoje é quarta-feira";
+        break;
+
+    default:
+        echo "Outro dia da semana";
+}
+
+echo "<br>";
+
+
+
+/* ==================================================
+1️⃣2️⃣ MATCH (PHP 8+)
+================================================== */
+
+$nota = 8;
+
+$resultado = match (true) {
+
+    $nota >= 7 => "Aprovado",
+    $nota >= 5 => "Recuperação",
+    default => "Reprovado"
+
+};
+
+echo $resultado;
+echo "<br>";
+
+
+
+/* ==================================================
+1️⃣3️⃣ ARRAY ASSOCIATIVO
+================================================== */
+
+$produto = [
+    "nome" => "Ana Maria",
+    "preco" => 5,
+    "estoque" => 12
+];
+
+echo $produto["nome"];
+echo "<br>";
+
+
+
+/* ==================================================
+1️⃣4️⃣ ATUALIZAR VALOR DE ARRAY
+================================================== */
+
+$produto["preco"] = 6;
+
+echo $produto["preco"];
+echo "<br>";
+
+
+
+/* ==================================================
+1️⃣5️⃣ ADICIONAR NOVO ELEMENTO
+================================================== */
+
+$produto["categoria"] = "Doce";
+
+echo $produto["categoria"];
+echo "<br>";
+
+
+
+/* ==================================================
+1️⃣6️⃣ ARRAY INDEXADO
+================================================== */
+
+$frutas = [
+    "maçã",
+    "banana",
+    "laranja",
+    "uva"
+];
+
+echo $frutas[0];
+echo "<br>";
+
+echo $frutas[1];
+echo "<br>";
+
+
+
+/* ==================================================
+1️⃣7️⃣ ARRAY MULTIDIMENSIONAL
+================================================== */
+
+$usuarios = [
+
+    [
+        "nome" => "Ana",
+        "idade" => 22
+    ],
+
+    [
+        "nome" => "Carlos",
+        "idade" => 25
+    ]
+
+];
+
+echo $usuarios[0]["nome"];
+echo "<br>";
+
+echo $usuarios[1]["idade"];
+echo "<br>";
+
+
+
+/* ==================================================
+1️⃣8️⃣ EXEMPLO COMPLETO
+================================================== */
+
+$name = "Jhonata";
+
+$produto = [
+    "nome" => "Ana Maria",
+    "preco" => 5,
+    "estoque" => 12
+];
+
+echo "Produto: " . $produto["nome"];
+echo "<br>";
+
+echo "Preço: " . $produto["preco"];
+echo "<br>";
+
+?>
