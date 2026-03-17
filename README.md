@@ -1,120 +1,94 @@
-# 🍬 Candy Store - PHP Project
+🍬 Candy Store - PHP Project (Atualizações)
 
-Projeto desenvolvido utilizando **PHP, HTML e CSS** com o objetivo de demonstrar conceitos fundamentais de programação web.
+Este projeto foi aprimorado para organização de código, boas práticas e inclusão de API.
 
-O sistema simula uma **loja de doces**, exibindo produtos, informações nutricionais, itens mais vendidos e ofertas disponíveis.
+As mudanças refletem melhorias na estrutura do projeto, no código PHP e na forma como os dados da loja são apresentados.
 
----
+🚀 Principais Melhorias
+1️⃣ Código Limpo e Organizado
 
-# 🚀 Tecnologias Utilizadas
+Padronização de variáveis e arrays (camelCase)
 
-- PHP
-- HTML5
-- CSS3
-- JSON (API)
+Uso de echo curto (<?= ?>) no HTML
 
----
+Remoção de código redundante e comentários desnecessários
 
-# 📚 Conceitos Trabalhados
+Blocos de código separados por seções claras (produtos, ofertas, nutrição)
 
-Este projeto foi desenvolvido para praticar diversos conceitos importantes da linguagem PHP e do desenvolvimento web.
+2️⃣ Estrutura de Dados Atualizada
 
-## Fundamentos de PHP
+Arrays associativos e multidimensionais reorganizados
 
-- Declaração de variáveis
-- Concatenação de strings
-- Operadores aritméticos
-- Operadores lógicos
+Atualização de valores nutricionais diretamente no array
 
----
+Adição de novos elementos (ex.: fiber)
 
-## Estruturas de Controle
+Arrays indexados (bestSellers) percorridos com foreach
 
-- `if / else`
-- `elseif`
-- `switch`
-- Operador ternário
+3️⃣ API em PHP
 
----
+Nova API (api.php) que retorna os dados da loja em JSON
 
-## Estruturas de Dados
+Inclui:
 
-- Arrays indexados
-- Arrays associativos
-- Arrays multidimensionais
+Nome da loja (store)
 
----
+Produtos mais vendidos (bestSellers)
 
-## Manipulação de Dados
+Ofertas disponíveis (offers) com estoque
 
-- Atualização de valores em arrays
-- Adição de novos elementos em arrays
-- Iteração utilizando `foreach`
+Status de disponibilidade de cada item
 
----
-
-## Integração PHP + HTML
-
-- Inserção dinâmica de dados no HTML
-- Uso de `echo` e `<?= ?>`
-- Renderização de listas dinâmicas
-
----
-
-## Estilização
-
-O projeto utiliza **CSS externo** para estilização da interface da aplicação.
-
-Arquivo utilizado:
-
----
-
-# 📡 API do Projeto
-
-O projeto também inclui uma **API simples em PHP**, responsável por fornecer dados da loja em formato **JSON**.
-
-A API retorna:
-
-- Nome da loja
-- Lista de produtos mais vendidos
-- Ofertas disponíveis
-- Informações de estoque
-
-Endpoint:
-
----
-
-# 🧠 Estrutura do Projeto
+Exemplo de resposta JSON:
+{
+  "status": "success",
+  "store": "Candy Store",
+  "totalOffers": 3,
+  "bestSellers": [
+    "Chocolate",
+    "Mints",
+    "Fudge",
+    "Bubble gum",
+    "Toffee",
+    "Jelly beans"
+  ],
+  "offers": [
+    { "name": "Ana Maria", "flavor": "strawberry", "stock": 110 },
+    { "name": "Ana Maria", "flavor": "chocolate",  "stock": 70 },
+    { "name": "Fudge",     "flavor": "with banana","stock": 80 }
+  ]
+}
+4️⃣ Estrutura de Projeto Organizada
 Estudo do Livro/
- index.php
- api.php
+ ├── index.php        # Página principal
+ ├── api.php          # API que retorna dados em JSON
+ ├── data.php         # Dados e variáveis da loja
+ ├── css/
+ │    └── styles.css  # Arquivo de estilização
+ └── README.md
+5️⃣ Boas Práticas Aplicadas
 
-css/
-styles.css
+Código modular e legível
 
-README.md
+Preparado para futuras funções e melhorias
 
----
+Padronização de nomes e tipagem de dados
 
-# ▶️ Como Executar
+Uso de JSON_PRETTY_PRINT e JSON_UNESCAPED_UNICODE na API
 
-1. Instale um servidor local (XAMPP, WAMP ou Laragon)
+Tratamento básico de erros (ex.: se nenhuma oferta estiver disponível)
 
-2. Coloque o projeto na pasta:
+👨‍💻 Autor
 
-3. Acesse no navegador:
-http://localhost/estudo%20do%20livro/
+Jhonata Nunes
+Estudante de Ciência da Computação
 
----
+📌 Objetivo das Atualizações
 
-# 👨‍💻 Autor
+Tornar o código mais limpo e organizado
 
-**Jhonata Nunes**
+Incluir API funcional para consumo de dados
 
-Estudante de **Ciência da Computação**.
+Aplicar boas práticas de desenvolvimento
 
----
-
-# 📌 Objetivo do Projeto
-
-Este projeto foi desenvolvido para **praticar conceitos fundamentais de PHP e desenvolvimento web**, servindo como parte de um portfólio acadêmico.
+Facilitar futuras evoluções do projeto

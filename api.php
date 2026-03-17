@@ -1,16 +1,17 @@
 <?php
-
+// =========================
+// HEADER DE RESPOSTA
+// =========================
 header("Content-Type: application/json; charset=utf-8");
 
-/* =========================
-   CONFIGURAÇÃO DA LOJA
-========================= */
+// =========================
+// CONFIGURAÇÃO DA LOJA
+// =========================
 $store = "Candy Store";
 
-
-/* =========================
-   PRODUTOS MAIS VENDIDOS
-========================= */
+// =========================
+// PRODUTOS MAIS VENDIDOS
+// =========================
 $bestSellers = [
     "Chocolate",
     "Mints",
@@ -20,10 +21,9 @@ $bestSellers = [
     "Jelly beans"
 ];
 
-
-/* =========================
-   OFERTAS DISPONÍVEIS
-========================= */
+// =========================
+// OFERTAS DISPONÍVEIS
+// =========================
 $offers = [
     [
         "name"   => "Ana Maria",
@@ -42,30 +42,41 @@ $offers = [
     ]
 ];
 
+// =========================
+// CONFIGURAÇÃO DE COMPRA
+// =========================
+$ordered = 80;   // quantidade mínima para liberar compra
+$deliver = true; // se a entrega está disponível
 
-/* =========================
-   TRATAMENTO DE ERRO SIMPLES
-========================= */
+// =========================
+// PROCESSAR OFERTAS
+// =========================
+foreach ($offers as &$offer) {
+    $offer['available'] = ($offer['stock'] >= $ordered) && $deliver ? true : false;
+}
+unset($offer); // quebra referência
+
+// =========================
+// VERIFICAR ERROS
+// =========================
 if (empty($offers)) {
     http_response_code(404);
-
     echo json_encode([
-        "error" => "No offers available"
-    ], JSON_PRETTY_PRINT);
-
+        "status" => "error",
+        "message" => "No offers available"
+    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-
-/* =========================
-   RESPOSTA DA API
-========================= */
+// =========================
+// RESPOSTA FINAL
+// =========================
 $response = [
-    "status"       => "success",
-    "store"        => $store,
-    "totalOffers"  => count($offers),
-    "bestSellers"  => $bestSellers,
-    "offers"       => $offers
+    "status"      => "success",
+    "store"       => $store,
+    "totalOffers" => count($offers),
+    "bestSellers" => $bestSellers,
+    "offers"      => $offers
 ];
 
 echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
