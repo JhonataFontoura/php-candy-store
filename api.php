@@ -1,86 +1,71 @@
 <?php
 
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=utf-8");
 
-/* ==================================================
-CONFIGURAÇÃO DA LOJA
-================================================== */
-
+/* =========================
+   CONFIGURAÇÃO DA LOJA
+========================= */
 $store = "Candy Store";
 
 
-/* ==================================================
-PRODUTOS MAIS VENDIDOS
-================================================== */
-
-$best_sellers = [
+/* =========================
+   PRODUTOS MAIS VENDIDOS
+========================= */
+$bestSellers = [
     "Chocolate",
     "Mints",
     "Fudge",
     "Bubble gum",
-    "Toffe",
+    "Toffee",
     "Jelly beans"
 ];
 
 
-/* ==================================================
-OFERTAS DISPONÍVEIS
-================================================== */
-
+/* =========================
+   OFERTAS DISPONÍVEIS
+========================= */
 $offers = [
-
     [
-        "name" => "Ana Maria",
+        "name"   => "Ana Maria",
         "flavor" => "strawberry",
-        "stock" => 110
+        "stock"  => 110
     ],
-
     [
-        "name" => "Ana Maria",
+        "name"   => "Ana Maria",
         "flavor" => "chocolate",
-        "stock" => 70
+        "stock"  => 70
     ],
-
     [
-        "name" => "Fudge",
+        "name"   => "Fudge",
         "flavor" => "with banana",
-        "stock" => 80
+        "stock"  => 80
     ]
-
 ];
 
 
-/* ==================================================
-RESPOSTA DA API
-================================================== */
+/* =========================
+   TRATAMENTO DE ERRO SIMPLES
+========================= */
+if (empty($offers)) {
+    http_response_code(404);
 
-$response = [
+    echo json_encode([
+        "error" => "No offers available"
+    ], JSON_PRETTY_PRINT);
 
-    "store" => $store,
-    "best_sellers" => $best_sellers,
-    "offers" => $offers
-
-];
-
-echo json_encode($response, JSON_PRETTY_PRINT);
-
-?>
-
-{
- "store": "Candy Store",
- "best_sellers": [
-  "Chocolate",
-  "Mints",
-  "Fudge",
-  "Bubble gum",
-  "Toffe",
-  "Jelly beans"
- ],
- "offers": [
-  {
-   "name": "Ana Maria",
-   "flavor": "strawberry",
-   "stock": 110
-  }
- ]
+    exit;
 }
+
+
+/* =========================
+   RESPOSTA DA API
+========================= */
+$response = [
+    "status"       => "success",
+    "store"        => $store,
+    "totalOffers"  => count($offers),
+    "bestSellers"  => $bestSellers,
+    "offers"       => $offers
+];
+
+echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
