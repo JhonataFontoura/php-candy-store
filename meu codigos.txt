@@ -312,3 +312,76 @@ echo "Preço: " . $produto["preco"];
 echo "<br>";
 
 ?>
+
+/* ==================================================
+1️⃣ FOREACH - ARRAY INDEXADO
+================================================== */
+
+$best_sellers = ['Chocolate', 'Mints', 'Fudge'];
+
+foreach ($best_sellers as $product) {
+    echo $product . "<br>";
+}
+
+/* ==================================================
+2️⃣ FOREACH - ARRAY ASSOCIATIVO
+================================================== */
+
+$offers = [
+    ['name' => 'Ana Maria', 'stock' => 100],
+    ['name' => 'Fudge', 'stock' => 50]
+];
+
+foreach ($offers as $offer) {
+    echo $offer['name'] . " - " . $offer['stock'] . "<br>";
+}
+
+/* ==================================================
+3️⃣ FOR - LOOP COM CONTADOR
+================================================== */
+
+for ($i = 1; $i <= 3; $i++) {
+    echo "Valor: $i <br>";
+}
+/* ==================================================
+4️⃣ WHILE
+================================================== */
+
+$i = 1;
+
+while ($i <= 3) {
+    echo "Valor: $i <br>";
+    $i++;
+}
+
+/* ==================================================
+5️⃣ DO WHILE
+================================================== */
+
+$i = 1;
+
+do {
+    echo "Valor: $i <br>";
+    $i++;
+} while ($i <= 3);
+
+/* ==================================================
+6️⃣ FOREACH COM CHAVE => VALOR
+================================================== */
+
+$nutrition = [
+    'fat' => '10g',
+    'sugar' => '20g'
+];
+
+foreach ($nutrition as $key => $value) {
+    echo "$key: $value <br>";
+}
+
+| Loop       | Quando usar                           |
+| ---------- | ------------------------------------- |
+| `for`      | Quando sabe quantas vezes vai repetir |
+| `while`    | Quando depende de condição            |
+| `do while` | Quando precisa rodar pelo menos 1 vez |
+| `foreach`  | Para percorrer arrays                 |
+

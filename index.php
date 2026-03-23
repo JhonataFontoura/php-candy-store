@@ -25,19 +25,27 @@
 
     <h4>Pricing</h4>
     <p>The price for each item is: <?= $price; ?></p>
-    <p>Discounted subtotal: <?= $subtotal; ?></p>
+    <p>
+     <!--Contador de preço com loop foreach-->
+<?php foreach ($pricing as $priceItem): ?>
+        <p>
+            Quantidade: <?= $priceItem['quantity']; ?><br>
+            Total: $<?= $priceItem['total']; ?><br>
+            Promoção: <?= $priceItem['promo']; ?><br>
+            Valor final: $<?= $priceItem['final']; ?>
+        </p>
+    <?php endforeach; ?>
 
     <h4>Best Sellers</h4>
-    <ul>
-        <?php foreach ($best_sellers as $product): ?>
+    <ul> <!-- <ul> Cria uma lista -->
+        <?php foreach ($best_sellers as $product):// loop para array indexado, formato ideal para percorrer array ?>
             <li><?= $product; ?></li>
         <?php endforeach; ?>
     </ul>
 
     <h4>Offers</h4>
 
-    <?php foreach ($offers as $offer): 
-        $buy = ($offer['stock'] >= $ordered) && $deliver;
+    <?php foreach ($offers as $offer):// loop para array associativo 
     ?>
 
         <p>
@@ -46,13 +54,13 @@
             Stock: <?= $offer['stock']; ?>
             <br>
 
-            <?= $offer['stock'] >= $ordered 
+            <?= $offer['is_available'] >= $ordered 
                 ? '✅ Available for order' 
                 : '❌ Not enough stock'; ?>
 
             <br>
 
-            Liberado para compra: <?= $buy ? "Yes" : "No"; ?>
+            Liberado para compra: <?= $offer ['can_buy'] ? "Yes" : "No"; ?>
         </p>
 
     <?php endforeach; ?>

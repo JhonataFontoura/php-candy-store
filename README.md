@@ -1,94 +1,97 @@
-🍬 Candy Store - PHP Project (Atualizações)
+# 🍬 Candy Store - PHP Project
+## 🎬 Demonstração
 
-Este projeto foi aprimorado para organização de código, boas práticas e inclusão de API.
+![Demo](/img/Apresentação.mp4)
 
-As mudanças refletem melhorias na estrutura do projeto, no código PHP e na forma como os dados da loja são apresentados.
+<p align="center">
+  <img src="https://img.shields.io/badge/PHP-8.x-blue?style=for-the-badge&logo=php">
+  <img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Nível-Intermediário-green?style=for-the-badge">
+</p>
 
-🚀 Principais Melhorias
-1️⃣ Código Limpo e Organizado
+---
 
-Padronização de variáveis e arrays (camelCase)
+## 👨‍💻 Autor
 
-Uso de echo curto (<?= ?>) no HTML
+**Jhony Nunes**
 
-Remoção de código redundante e comentários desnecessários
+---
 
-Blocos de código separados por seções claras (produtos, ofertas, nutrição)
+## 📌 Sobre o Projeto
 
-2️⃣ Estrutura de Dados Atualizada
+Este projeto simula uma **loja de doces** desenvolvida em **PHP puro (sem frameworks)**, com foco no aprendizado de lógica de programação e boas práticas.
 
-Arrays associativos e multidimensionais reorganizados
+O sistema permite:
+- 📦 Exibir produtos
+- 🧪 Mostrar informações nutricionais
+- 💰 Calcular preços dinamicamente
+- 🔥 Listar produtos mais vendidos
+- 🛒 Validar compra com base em estoque e entrega
 
-Atualização de valores nutricionais diretamente no array
+---
 
-Adição de novos elementos (ex.: fiber)
+## 🧠 Estrutura do Projeto
 
-Arrays indexados (bestSellers) percorridos com foreach
+```bash
+data.php   → dados + lógica
+index.php  → apresentação (view)
+🔄 Fluxo da Aplicação
+data.php processa todos os dados
+index.php apenas exibe os dados
+O usuário visualiza as informações já prontas
+🧩 Lógica Implementada
+✔️ Verificação de disponibilidade
+$offer['is_available'] = $offer['stock'] >= $ordered;
+✔️ Liberação de compra
+$offer['can_buy'] = $offer['is_available'] && $deliver;
+✔️ Cálculo de preço com desconto
+$total = $price * $counter;
+$finalPrice = $total * (1 - $discount);
+💡 Conceitos Aplicados
+Variáveis
+Arrays indexados
+Arrays associativos
+Estruturas de repetição (for, foreach)
+Condições lógicas
+Operador ternário
+Separação de responsabilidade (lógica vs apresentação)
+🚀 Nível do Projeto
 
-3️⃣ API em PHP
+📊 Intermediário (em evolução)
 
-Nova API (api.php) que retorna os dados da loja em JSON
+✔️ Pontos fortes:
+Separação entre lógica e apresentação
+Código organizado
+Uso de regras de negócio
+Boa base de PHP
+📈 Próximos passos:
+Implementar padrão MVC
+Utilizar POO (Programação Orientada a Objetos)
+Integrar com banco de dados
+Evoluir para Laravel
+Melhoria do CSS
+▶️ Como Executar
+Instale o XAMPP (ou similar)
+Coloque o projeto em:
 
-Inclui:
+C:\xampp\htdocs\
 
-Nome da loja (store)
+Inicie o Apache
+Acesse no navegador:
 
-Produtos mais vendidos (bestSellers)
+http://localhost/seu-projeto
 
-Ofertas disponíveis (offers) com estoque
+🛠️ Tecnologias Utilizadas
+PHP
+HTML
+CSS
+🎯 Objetivo
 
-Status de disponibilidade de cada item
+Este projeto foi desenvolvido com o objetivo de:
 
-Exemplo de resposta JSON:
-{
-  "status": "success",
-  "store": "Candy Store",
-  "totalOffers": 3,
-  "bestSellers": [
-    "Chocolate",
-    "Mints",
-    "Fudge",
-    "Bubble gum",
-    "Toffee",
-    "Jelly beans"
-  ],
-  "offers": [
-    { "name": "Ana Maria", "flavor": "strawberry", "stock": 110 },
-    { "name": "Ana Maria", "flavor": "chocolate",  "stock": 70 },
-    { "name": "Fudge",     "flavor": "with banana","stock": 80 }
-  ]
-}
-4️⃣ Estrutura de Projeto Organizada
-Estudo do Livro/
- ├── index.php        # Página principal
- ├── api.php          # API que retorna dados em JSON
- ├── data.php         # Dados e variáveis da loja
- ├── css/
- │    └── styles.css  # Arquivo de estilização
- └── README.md
-5️⃣ Boas Práticas Aplicadas
+Praticar lógica de programação
+Aprender manipulação de dados em PHP
+Evoluir para padrões profissionais
+🔥 Conclusão
 
-Código modular e legível
-
-Preparado para futuras funções e melhorias
-
-Padronização de nomes e tipagem de dados
-
-Uso de JSON_PRETTY_PRINT e JSON_UNESCAPED_UNICODE na API
-
-Tratamento básico de erros (ex.: se nenhuma oferta estiver disponível)
-
-👨‍💻 Autor
-
-Jhonata Nunes
-Estudante de Ciência da Computação
-
-📌 Objetivo das Atualizações
-
-Tornar o código mais limpo e organizado
-
-Incluir API funcional para consumo de dados
-
-Aplicar boas práticas de desenvolvimento
-
-Facilitar futuras evoluções do projeto
+Este projeto marca a transição de um desenvolvedor iniciante para intermediário, com foco em organização de código e boas práticas.
