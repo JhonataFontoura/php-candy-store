@@ -1,7 +1,7 @@
 # 🍬 Candy Store - PHP Project
 ## 🎬 Demonstração
 
-![Demo](/img/Apresentação.mp4)
+![Demo](/img/apresentacao.gif)
 
 <p align="center">
   <img src="https://img.shields.io/badge/PHP-8.x-blue?style=for-the-badge&logo=php">
