@@ -1,82 +1,97 @@
 <?php
-// =========================
-// HEADER DE RESPOSTA
-// =========================
-header("Content-Type: application/json; charset=utf-8");
 
-// =========================
-// CONFIGURAÇÃO DA LOJA
-// =========================
-$store = "Candy Store";
+require "require/data.php";
 
-// =========================
-// PRODUTOS MAIS VENDIDOS
-// =========================
-$bestSellers = [
-    "Chocolate",
-    "Mints",
-    "Fudge",
-    "Bubble gum",
-    "Toffee",
-    "Jelly beans"
-];
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET");
 
-// =========================
-// OFERTAS DISPONÍVEIS
-// =========================
-$offers = [
-    [
-        "name"   => "Ana Maria",
-        "flavor" => "strawberry",
-        "stock"  => 110
-    ],
-    [
-        "name"   => "Ana Maria",
-        "flavor" => "chocolate",
-        "stock"  => 70
-    ],
-    [
-        "name"   => "Fudge",
-        "flavor" => "with banana",
-        "stock"  => 80
-    ]
-];
+$method = $_SERVER['REQUEST_METHOD'];
+$endpoint = $_GET['endpoint'] ?? null;
 
-// =========================
-// CONFIGURAÇÃO DE COMPRA
-// =========================
-$ordered = 80;   // quantidade mínima para liberar compra
-$deliver = true; // se a entrega está disponível
-
-// =========================
-// PROCESSAR OFERTAS
-// =========================
-foreach ($offers as &$offer) {
-    $offer['available'] = ($offer['stock'] >= $ordered) && $deliver ? true : false;
-}
-unset($offer); // quebra referência
-
-// =========================
-// VERIFICAR ERROS
-// =========================
-if (empty($offers)) {
-    http_response_code(404);
-    echo json_encode([
-        "status" => "error",
-        "message" => "No offers available"
-    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+function response($data, $status = 200) {
+    http_response_code($status);
+    echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// =========================
-// RESPOSTA FINAL
-// =========================
-$response = [
-    "status"      => "success",
-    "store"       => $store,
-    "totalOffers" => count($offers),
-    "bestSellers" => $bestSellers,
-    "offers"      => $offers
-];
+if ($method !== 'GET') {
+    response([
+        'status' => 'error',
+        'message' => 'Method not allowed'
+    ], 405);
+}
 
-echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+if (!$endpoint) {
+    response([
+        'status' => 'error',
+        'message' => 'Endpoint is required'
+    ], 400);
+}
+
+switch ($endpoint) {
+
+    case 'all':
+        response([
+            'status' => 'success',
+            'data' => [
+                'name' => $name,
+                'item' => $item,
+                'price' => $price,
+                'nutrition' => $nutrition,
+                'pricing' => $pricing,
+                'best_sellers' => $best_sellers,
+                'offers' => $offers,
+                'offers_of_the_day' => [
+                    'day' => $day,
+                    'offer' => $do_it
+                ]
+            ]
+        ]);
+        break;
+
+    case 'pricing':
+        response(['status' => 'success', 'data' => $pricing]);
+        break;
+
+    case 'best_sellers':
+        response(['status' => 'success', 'data' => $best_sellers]);
+        break;
+
+    case 'offers':
+        if (isset($_GET['available'])) {
+            $available = $_GET['available'] === 'true';
+
+            $filtered = array_filter($offers, function($offer) use ($available) {
+                return $offer['is_available'] === $available;
+            });
+
+            response([
+                'status' => 'success',
+                'data' => array_values($filtered)
+            ]);
+        }
+
+        response(['status' => 'success', 'data' => $offers]);
+        break;
+
+    case 'nutrition':
+        response(['status' => 'success', 'data' => $nutrition]);
+        break;
+
+    case 'offers_of_the_day':
+        response([
+            'status' => 'success',
+            'data' => [
+                'day' => $day,
+                'offer' => $do_it
+            ]
+        ]);
+        break;
+
+    default:
+        response([
+            'status' => 'error',
+            'message' => 'Invalid endpoint'
+        ], 400);
+}

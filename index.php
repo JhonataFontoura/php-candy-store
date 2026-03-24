@@ -1,72 +1,130 @@
-<?php require "data.php"; ?>
+<?php require "require/data.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Echo Command</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echo Command</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
 
-    <h1>The Candy Store</h1>
+  <?php require "includes/header.php"; ?>
 
-    <h2>Welcome <?= $name; ?></h2>
+  <main>
+    <div class="container">
 
-    <h3>Item: <?= $item; ?></h3>
+      <h2>Welcome <?= $name; ?></h2>
 
-    <h4>Nutrition Information</h4>
-    <p>Fat: <?= $nutrition['fat']; ?></p>
-    <p>Sugar: <?= $nutrition['sugar']; ?></p>
-    <p>Salt: <?= $nutrition['salt']; ?></p>
-    <p>Fiber: <?= $nutrition['fiber']; ?></p>
+      <h3>Nutrition Information
+        <table>
+            <thead>
+                <tr>
+                    <th>Nutrition</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fat</td>
+                    <td><?= $nutrition['fat']; ?></td>
+                </tr>
+                <tr>
+                    <td>Sugar</td>
+                    <td><?= $nutrition['sugar']; ?></td>
+                </tr>
+                <tr>
+                    <td>Salt</td>
+                    <td><?= $nutrition['salt']; ?></td>
+                </tr>
+            </tbody>
+        </table>
+        
+      </h3>
 
-    <h4>Pricing</h4>
-    <p>The price for each item is: <?= $price; ?></p>
-    <p>
-     <!--Contador de preço com loop foreach-->
-<?php foreach ($pricing as $priceItem): ?>
-        <p>
-            Quantidade: <?= $priceItem['quantity']; ?><br>
-            Total: $<?= $priceItem['total']; ?><br>
-            Promoção: <?= $priceItem['promo']; ?><br>
-            Valor final: $<?= $priceItem['final']; ?>
-        </p>
-    <?php endforeach; ?>
+      <h4>Pricing</h4>
+      <p>The price for each item is: <?= $price; ?></p>
 
-    <h4>Best Sellers</h4>
-    <ul> <!-- <ul> Cria uma lista -->
-        <?php foreach ($best_sellers as $product):// loop para array indexado, formato ideal para percorrer array ?>
-            <li><?= $product; ?></li>
-        <?php endforeach; ?>
-    </ul>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Promotion</th>
+              <th>Final Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($pricing as $priceItem): ?>
+              <tr>
+                <td><?= $priceItem["quantity"]; ?> <?= $priceItem["quantityText"]; ?></td>
+                <td>$<?= $priceItem["total"]; ?></td>
+                <td><?= $priceItem["promo"]; ?></td>
+                <td>$<?= $priceItem["final"]; ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
 
-    <h4>Offers</h4>
+      <h4>Best Sellers</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($best_sellers as $product): ?>
+              <tr>
+                <td><?= $product; ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
 
-    <?php foreach ($offers as $offer):// loop para array associativo 
-    ?>
+      <h4>Offers</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Flavor</th>
+              <th>Stock</th>
+              <th>Status</th>
+              <th>Available to Buy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($offers as $offer): ?>
+              <tr>
+                <td><?= $offer["name"]; ?></td>
+                <td><?= $offer["flavor"]; ?></td>
+                <td><?= $offer["stock"]; ?></td>
+                <td>
+                  <?= $offer["is_available"]
+                    ? "Available"
+                    : "Not enough"; ?>
+                </td>
+                <td><?= $offer["can_buy"] ? "Yes" : "No"; ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
 
-        <p>
-            Item: <?= $offer['name']; ?> -
-            Flavor: <?= $offer['flavor']; ?> -
-            Stock: <?= $offer['stock']; ?>
-            <br>
+      <h4>Offers of the Day</h4>
+      <p>Offers on <?= $day; ?> = <?= $do_it; ?></p>
 
-            <?= $offer['is_available'] >= $ordered 
-                ? '✅ Available for order' 
-                : '❌ Not enough stock'; ?>
+    </div>
+  </main>
 
-            <br>
-
-            Liberado para compra: <?= $offer ['can_buy'] ? "Yes" : "No"; ?>
-        </p>
-
-    <?php endforeach; ?>
-
-    <h4>Offers of the Day</h4>
-    <p>Offers on <?= $day; ?> = <?= $do_it; ?></p>
+  <?php require "includes/footer.php"; ?>
 
 </body>
 </html>

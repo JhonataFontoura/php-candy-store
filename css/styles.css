@@ -1,122 +1,294 @@
-@import url("https://fonts.googleapis.com/css?family=Playfair+Display:900|Raleway:500,700");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Raleway:wght@500;700&display=swap");
 
-html, body {
-  height: 100%;
-  }
+/* =========================
+   RESET
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
+html, body { height: 100%; }
+
+/* =========================
+   THEME / TOKENS
+========================= */
+:root{
+  /* Cores */
+  --bg: #850825;
+  --bg-2: #4a0314;     /* header */
+  --bg-3: #3a0210;     /* nav/footer */
+  --surface: rgba(0,0,0,.18);
+
+  --text: #fbccbf;
+  --text-strong: #ffffff;
+  --accent: #fcba63;
+
+  --border-soft: rgba(251, 204, 191, 0.16);
+  --border-accent: rgba(252,186,99,.38);
+
+  /* Layout */
+  --container: 980px;
+  --radius: 14px;
+  --shadow: 0 16px 40px rgba(0,0,0,.25);
+
+  /* Sticky heights (evita “morder” conteúdo) */
+  --header-h: 56px;
+  --nav-h: 44px;
+  --footer-h: 44px;
+}
+
+/* =========================
+   BASE
+========================= */
 body {
-  font-family: "Raleway", sans-serif;
-  background-color: #850825;
-  color: #fbccbf;
-  margin: 0px;
+  margin: 0;
+  font-family: "Raleway", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  /* Fundo decorativo (menos intrusivo) */
   background-image: url("../img/candy.png");
-  background-size: 245px 380px;
+  background-size: 190px auto;
   background-position: right top;
   background-repeat: repeat-y;
-  }
 
+  /* respiro p/ não colar na faixa */
+  padding-right: clamp(0px, 3vw, 48px);
+}
+
+/* Overlay para contraste */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.30) 0%,
+    rgba(0,0,0,.18) 40%,
+    rgba(0,0,0,.30) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Conteúdo acima do overlay */
+header, nav, main, footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   HEADER (compacto + sticky)
+========================= */
 h1 {
+  margin: 0;
+  padding: 10px 18px;
   font-family: "Playfair Display", serif;
-  padding: 10px 20px 12px 20px;
-  margin: 0px;
-  color: #fcba63;
-  }
+  font-weight: 900;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
 
-h2 {
-  font-weight: 700;
-  font-size: 1em;
+  background-color: var(--bg-2);
+  color: var(--accent);
+  border-bottom: 1px solid var(--border-accent);
+
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* =========================
+   NAV (fina + sticky)
+========================= */
+nav {
+  padding: 6px 14px;
+  background-color: color-mix(in oklab, var(--bg-3) 88%, black 12%);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+
+  border-bottom: 1px solid var(--border-accent);
+
+  position: sticky;
+  top: var(--header-h);
+  z-index: 49;
+
+  backdrop-filter: blur(4px);
+}
+
+nav a {
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 20px;
-  margin: 0px;
-  }
+  color: var(--text-strong);
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  font-size: 0.82rem;
+  text-decoration: none;
+
+  padding: 8px 10px;
+  border-radius: 999px;
+  transition: background .18s ease, transform .12s ease, color .18s ease;
+}
+
+nav a:hover {
+  background: rgba(252,186,99,.14);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   MAIN (reserva espaço p/ footer)
+========================= */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 18px;
+  padding-bottom: calc(var(--footer-h) + 28px);
+}
+
+/* =========================
+   CONTAINER (card de leitura)
+========================= */
+.container {
+  width: min(100% - 2rem, var(--container));
+  margin: 0 auto;
+  padding: clamp(16px, 2vw, 22px);
+
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(2px);
+}
+
+/* =========================
+   TITLES / TEXT
+========================= */
+h2, h3, h4 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  margin: 18px 0 10px;
+  color: var(--accent);
+}
 
 p {
-  padding: 6px 20px 6px 20px;
-  margin: 0px;
-  }
+  line-height: 1.75;
+  margin: 0 0 12px;
+  max-width: 70ch;
+}
+
+/* Links gerais */
+a {
+  color: var(--text-strong);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* =========================
+   TABLE (mais legível)
+========================= */
+.table-wrap{
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-accent);
+  box-shadow: 0 10px 25px rgba(0,0,0,.18);
+}
 
 table {
-  background-color: #850825;
-  margin: 10px;
-  padding: 5px;
-  border: 1px solid #fbccbf;
-  border-spacing: 0px;
-  }
-  
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  background: rgba(0,0,0,.16);
+  min-width: 560px;
+}
+
+th, td {
+  padding: 12px 14px;
+}
+
 th {
   text-transform: uppercase;
   text-align: left;
   font-size: 0.75em;
   letter-spacing: 0.2em;
-  padding: 5px 10px;
-  background-color: #fbccbf;
-  color: #850825;
-  }
-  
+
+  background-color: rgba(251,204,191,.95);
+  color: var(--bg);
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 td {
-  padding: 5px 10px;
-  }
-
-a {
-  color: #fbccbf;
-  letter-spacing: 1px;
-  font-weight: 600;
-  font-style: normal;
-  text-decoration: none;
-  }
-
-nav {
-  padding: 0.5em;
-  background-color: #730720;
-  }
-
-nav a {
-  text-transform: uppercase;
-  padding: .5em;
-  }
-nav a:hover {
-  color: #fff;
-  }
- 
-.button {
-  background-color: #fbccbf;
-  color: #850825;
-  border-color: #fbccbf;
-  border-radius: 300px;
-  -webkit-transition: .3s background-color linear;
-  -moz-transition: .3s background-color linear;
-  -o-transition: .3s background-color linear;
-  transition: .3s background-color linear;
-  display: inline-block;
-  padding: 10px 20px;
-  margin-top: 10px;
-  font-weight: 600;
-  font-style: normal;
-  letter-spacing: 1px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  }
-
-.button:hover {
-  background-color: #fcba63;
-  border-radius: 300px;
-  -webkit-transition: .1s background-color linear;
-  -moz-transition: .1s background-color linear;
-  -o-transition: .1s background-color linear;
-  transition: .1s background-color linear;
-  color: #850825;
-}
-  
-.offer {
-  text-transform: uppercase;  
+  border-bottom: 1px solid var(--border-soft);
 }
 
+tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+tbody tr:hover {
+  background-color: rgba(252,186,99, 0.08);
+}
+
+/* =========================
+   FOOTER (baixo e não intrusivo)
+========================= */
 footer {
-  background-color: #730720;
-  padding: 10px;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
+  background-color: color-mix(in oklab, var(--bg-3) 85%, black 15%);
+  color: rgba(255,255,255,.92);
+  padding: 10px 14px;
+  text-align: center;
+  border-top: 1px solid var(--border-accent);
+
+  /* garante que não fique por cima do conteúdo */
+  position: static;
+}
+
+/* Se tiver <small> no footer, fica mais elegante */
+footer small { opacity: .9; }
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 720px) {
+  body {
+    background-size: 140px auto;
+    padding-right: 0;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    padding: 10px 14px;
+  }
+
+  nav {
+    padding: 6px 10px;
+  }
+
+  nav a {
+    font-size: .78rem;
+    padding: 8px 9px;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
