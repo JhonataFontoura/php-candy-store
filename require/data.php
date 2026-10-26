@@ -71,6 +71,7 @@ foreach ($offers as &$offer) {
     $offer['is_available'] = $offer['stock'] >= $ordered;
     $offer['can_buy'] = $offer['is_available'] && $deliver; 
 }
+unset($offer); // encerra a referência criada pelo foreach
 /* =========================
    PROMOÇÕES POR DIA
 ========================= */
