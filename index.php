@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Echo Command</title>
+  <title>The Candy Store | PHP Study Project</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 
@@ -18,7 +18,8 @@
 
       <h2>Welcome <?= $name; ?></h2>
 
-      <h3>Nutrition Information
+      <h3 id="nutrition">Nutrition Information</h3>
+      <div class="table-wrap">
         <table>
             <thead>
                 <tr>
@@ -41,10 +42,9 @@
                 </tr>
             </tbody>
         </table>
-        
-      </h3>
+      </div>
 
-      <h4>Pricing</h4>
+      <h4 id="pricing">Pricing</h4>
       <p>The price for each item is: <?= $price; ?></p>
 
       <div class="table-wrap">
@@ -70,7 +70,7 @@
         </table>
       </div>
 
-      <h4>Best Sellers</h4>
+      <h4 id="best-sellers">Best Sellers</h4>
       <div class="table-wrap">
         <table>
           <thead>
@@ -88,7 +88,7 @@
         </table>
       </div>
 
-      <h4>Offers</h4>
+      <h4 id="offers">Offers</h4>
       <div class="table-wrap">
         <table>
           <thead>
